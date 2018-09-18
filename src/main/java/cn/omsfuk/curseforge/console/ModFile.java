@@ -16,7 +16,7 @@ public class ModFile implements Cloneable {
 
     private String size;
 
-    private Date updated;
+    private String updated;
 
     private String downloadLink;
 
@@ -50,11 +50,11 @@ public class ModFile implements Cloneable {
         this.size = size;
     }
 
-    public Date getUpdated() {
+    public String getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(String updated) {
         this.updated = updated;
     }
 

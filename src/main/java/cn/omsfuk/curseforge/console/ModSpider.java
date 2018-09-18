@@ -60,7 +60,7 @@ public class ModSpider implements Callable<ModRegistry> {
             String name = singleElement.select(".project-file-name-container a").attr("data-name");
             modFile.setName(name.endsWith(".jar") ? name.substring(0, name.lastIndexOf(".")) : name);
             modFile.setSize(singleElement.select(".project-file-size").text());
-            modFile.setUpdated(parseToDate(singleElement.select(".project-file-date-uploaded abbr").text()));
+            modFile.setUpdated(singleElement.select(".project-file-date-uploaded abbr").text());
             modFile.setGameVersion(singleElement.select(".version-label").text());
             modFile.setDownloadLink(Constants.BASEURL + singleElement.select(".project-file-download-button a").attr("href"));
             modFile.setDownloads(singleElement.select(".project-file-downloads").text());
@@ -69,32 +69,6 @@ public class ModSpider implements Callable<ModRegistry> {
         }
 
         return modFiles;
-    }
-
-    private Date parseToDate(String date) {
-        String[] strs = date.trim().replace(",", "").split(" ");
-        String monthStr = strs[0], dayStr = strs[1], yearStr = strs[2];
-        int month, day, year;
-        switch (monthStr) {
-            case "Jan": month = 1; break;
-            case "Feb": month = 2; break;
-            case "Mar": month = 3; break;
-            case "Apr": month = 4; break;
-            case "May": month = 5; break;
-            case "Jun": month = 6; break;
-            case "Jul": month = 7; break;
-            case "Aug": month = 8; break;
-            case "Sep": month = 9; break;
-            case "Oct": month = 10; break;
-            case "Nov": month = 11; break;
-            case "Dec": month = 12; break;
-            default: month = 0;
-        }
-        day = Integer.parseInt(dayStr);
-        year = Integer.parseInt(yearStr);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-        return calendar.getTime();
     }
 
     private String getHtml() {
