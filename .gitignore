@@ -1,0 +1,6 @@
+curseforge.iml
+/target/**
+/out/**
+config.json
+/mods
+.idea/**
